@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-	dockerfile true
-	}
+    agent any
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('docker_hub')
@@ -11,8 +9,10 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+		    echo 'Test begin'
                     // Build the Docker image
-                    docker.build('my-docker-image')
+                    docker build -t my-docker-image .
+		    echo 'This where the change happend'
                 }
             }
         }
