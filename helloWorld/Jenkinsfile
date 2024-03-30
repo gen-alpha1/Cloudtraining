@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('docker_hub')
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    // Build the Docker image
+                    docker.build('my-docker-image')
+                }
+            }
+        }
+        stage('Push') {
+            steps {
+                script {
+                    // Push the Docker image to Docker Hub
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials-id') {
+                        docker.image('my-docker-image').push('latest')
+                    }
+                }
+            }
+        }
+    }
+}
+
