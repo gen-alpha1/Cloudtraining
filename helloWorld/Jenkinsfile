@@ -11,7 +11,7 @@ pipeline {
                 script {
 		    echo 'Test begin'
                     // Build the Docker image
-                    sh 'docker build -t my-docker-image ./helloWorld/'
+                    sh 'docker build -t genesisalpha456/hello ./helloWorld/'
 		    echo 'This where the change happend'
                 }
             }
@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     // Push the Docker image to Docker Hub
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker_hub') {
+                    docker.withRegistry('', 'docker_hub') {
                         docker.image('my-docker-image').push('latest')
                     }
                 }
