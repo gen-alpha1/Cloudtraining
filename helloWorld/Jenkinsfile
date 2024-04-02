@@ -30,7 +30,7 @@ pipeline {
 	    steps {
 		script {
 			// Connect to the other instance using ssh
-			sh 'ssh root@138.197.116.169'
+			sh 'ssh -T root@138.197.116.169 138.197.116.169'
 			echo 'Connected using ssh'
 			sh 'docker pull genesisalpha456/hello:latest'
 			sh 'docker run --name hello_world -d genesisalpha456/hello:latest'
