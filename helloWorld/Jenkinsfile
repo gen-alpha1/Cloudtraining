@@ -31,16 +31,11 @@ pipeline {
 		script {
 			// Connect to the other instance using ssh
 			sshagent(credentials: ['jenkins_ssh']){
-			sh '''[ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
-                               ssh-keyscan -t rsa 138.197.116.169 >> ~/.ssh/known_hosts
-                               ssh jenkins@138.197.116.169'''
-
-//				sh 'ssh -T jenkins@138.197.116.169'
-//				echo 'Connected using ssh'
-//				sh 'docker pull genesisalpha456/hello:latest'
-//				sh 'docker run --name hello_world -d genesisalpha456/hello:latest'
-//				def psOutput = sh(script: 'docker ps', returnStdout: true).trim()
-//				println("Docker PS Output:\n${psOutput}")
+			            // Connect to the other instance using ssh
+	                sh '''mkdir -p ~/.ssh && chmod 0700 ~/.ssh
+                       touch ~/.ssh/known_hosts && chmod 0644 ~/.ssh/known_hosts
+                       ssh-keyscan -t rsa 138.197.116.169 >> ~/.ssh/known_hosts
+                       ssh -o StrictHostKeyChecking=no jenkins@138.197.116.169'''
 			}
 		   }
 		}
