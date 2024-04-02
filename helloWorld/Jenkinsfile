@@ -30,12 +30,14 @@ pipeline {
 	    steps {
 		script {
 			// Connect to the other instance using ssh
-			sh 'ssh -T jenkins@138.197.116.169'
-			echo 'Connected using ssh'
-			sh 'docker pull genesisalpha456/hello:latest'
-			sh 'docker run --name hello_world -d genesisalpha456/hello:latest'
-			def psOutput = sh(script: 'docker ps', returnStdout: true).trim()
-                        println("Docker PS Output:\n${psOutput}")
+			sshagent(credentials: ['jenkins_ssh']){
+				sh 'ssh -T jenkins@138.197.116.169'
+				echo 'Connected using ssh'
+				sh 'docker pull genesisalpha456/hello:latest'
+				sh 'docker run --name hello_world -d genesisalpha456/hello:latest'
+				def psOutput = sh(script: 'docker ps', returnStdout: true).trim()
+				println("Docker PS Output:\n${psOutput}")
+			}
 		   }
 		}
 	}
