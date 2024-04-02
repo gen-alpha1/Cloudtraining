@@ -32,10 +32,7 @@ pipeline {
 			// Connect to the other instance using ssh
 			sshagent(credentials: ['jenkins_ssh']){
 			            // Connect to the other instance using ssh
-	                sh '''mkdir -p ~/.ssh && chmod 0700 ~/.ssh
-                       touch ~/.ssh/known_hosts && chmod 0644 ~/.ssh/known_hosts
-                       ssh-keyscan -t rsa 138.197.116.169 >> ~/.ssh/known_hosts
-                       ssh -o StrictHostKeyChecking=no jenkins@138.197.116.169'''
+	                sh '''ssh -T 138.197.116.169'''
 			}
 		   }
 		}
