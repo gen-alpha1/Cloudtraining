@@ -30,10 +30,9 @@ pipeline {
 	    steps {
 		script {
 			// Connect to the other instance using ssh
-			sshagent(credentials: ['jenkins_ssh']){
 			            // Connect to the other instance using ssh
-	                sh '''ssh -o StrictHostKeyChecking=no jenkins@138.197.116.169'''
-			}
+	                sh '''ssh -T jenkins@138.197.116.169'''
+			
 		   }
 		}
 	}
