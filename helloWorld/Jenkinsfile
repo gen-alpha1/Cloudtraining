@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('docker_hub')
+	SSH_credentials = credentials('ssh_connect')
     }
 
     stages {
@@ -30,13 +31,14 @@ pipeline {
 	stage('Connect_ssh'){
 	    steps {
 		script {
+			sshagent(credentials: ['ssh_connect']){
 			// Connect to the other instance using ssh
 			  echo'This will process the ssh connect to Mach2'          // Connect to the other instance using ssh
 	                  sh '''ssh root@104.131.183.80'''
 			  sh '''docker pull genesisalpha456/hello:latest'''
 			echo'Pulled image successfully and now trying to run the image'
 			  sh '''docker run genesisalpha456/hello:latest'''
-			
+			}
 		   }
 		}
 	}
