@@ -32,7 +32,7 @@ pipeline {
 		script {
 			// Connect to the other instance using ssh
 			  echo'This will process the ssh connect to Mach2'          // Connect to the other instance using ssh
-	                  sh '''ssh -T root@104.131.183.80'''
+	                  sh '''ssh root@104.131.183.80'''
 			  sh '''docker pull genesisalpha456/hello:latest'''
 			echo'Pulled image successfully and now trying to run the image'
 			  sh '''docker run genesisalpha456/hello:latest'''
