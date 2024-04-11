@@ -33,11 +33,13 @@ pipeline {
 		script {
 			sshagent(credentials: ['ssh_connect']){
 			// Connect to the other instance using ssh
-			  echo'This will process the ssh connect to Mach2'          // Connect to the other instance using ssh
-	                  sh '''ssh root@104.131.183.80'''
-			  sh '''docker pull genesisalpha456/hello:latest'''
-			echo'Pulled image successfully and now trying to run the image'
-			  sh '''docker run genesisalpha456/hello:latest'''
+	                    def sshUser = 'root'
+	                    def sshKeyPath = '/root/.ssh/id_rsa_awsmach1' // Path to your private key file
+	                    def mach2Host = 'root@104.131.183.80'
+	                    def mach2Port = 22 // SSH port (default is 22)
+	
+	                    // Execute SSH command
+	                    sh "ssh -i ${sshKeyPath} -p ${mach2Port} ${sshUser}@${mach2Host} 'echo Hello from mach1'"
 			}
 		   }
 		}
