@@ -34,9 +34,11 @@ pipeline {
 	            sshagent(credentials: ['ssh_connect']){
 	                // Connect to the other instance using ssh
 	                def sshUser = 'root'
+	              //  def sshKeyPath = '/var/lib/jenkins/workspace/job_1@tmp/private_key_8300527998234521403.key' // Update with correct path
 	                def mach2Host = '104.131.183.80'
+	                def mach2Port = 22 // SSH port (default is 22)
 	                sh 'ls'// Execute SSH command
-	                sh "ssh ${sshUser}@${mach2Host} 'echo Hello from mach1'"
+	                sh "ssh -p ${mach2Port} ${sshUser}@${mach2Host} 'echo Hello from mach1'"
 	            }
 	        }
 	    }
