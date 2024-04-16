@@ -31,7 +31,7 @@ pipeline {
 	stage('Connect_ssh'){
 	    steps {
 		script {
-			sshagent(credentials: [sshUserPrivateKey(credentialsId: 'ssh_connect', keyFileVariable: 'SSH_CREDENTIALS')]){
+			sshagent('ssh_connect'){
 			// Connect to the other instance using ssh
 	                    def sshUser = 'root'
 	                    def sshKeyPath = '/root/.ssh/id_rsa_awsmach1' // Path to your private key file
