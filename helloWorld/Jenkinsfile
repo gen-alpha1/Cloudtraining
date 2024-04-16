@@ -32,15 +32,10 @@ pipeline {
 	    steps {
 	        script {
 	            sshagent(['ssh_connect']){
-			      sh'''ls -a'''
-			      sh'''pwd'''
-	                // Connect to the other instance using ssh
-	                // def sshUser = 'root'
-	                // def sshKeyPath = '/var/lib/jenkins/workspace/job_1@tmp/private_key_8300527998234521403.key' // Update with correct path
-	                // def mach2Host = '104.131.183.80'
-	                // def mach2Port = 22 // SSH port (default is 22)
-	                // sh 'ls'// Execute SSH command
-	                // sh "ssh -i ${sshKeyPath} -p ${mach2Port} ${sshUser}@${mach2Host} 'echo Hello from mach1'"
+			      sh'''hostname -I'''
+			      sh'''docker pull genesisalpha456/hello:latest'''
+			      sh'''docker run -d -p 8080:80 genesisalpha456/hello:latest'''
+			      echo'''Task completed!'''
 	            }
 	        }
 	    }
