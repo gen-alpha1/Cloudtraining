@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('docker_hub')
-	SSH_CREDENTIALS = credentials('ssh_connect')
+	//SSH_CREDENTIALS = credentials('ssh_connect')
     }
 
     stages {
@@ -31,12 +31,9 @@ pipeline {
 	stage('Connect_ssh'){
 	    steps {
 	        script {
-	            sshagent(credentials: ['ssh_connect']){
-			      sh '''
-				  [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
-				  ssh-keyscan -t rsa,dsa example.com >> ~/.ssh/known_hosts
-				  ssh user@example.com ...
-			      '''
+	            sshagent(['ssh_connect']){
+			      sh'''ls -a'''
+			      sh'''pwd'''
 	                // Connect to the other instance using ssh
 	                // def sshUser = 'root'
 	                // def sshKeyPath = '/var/lib/jenkins/workspace/job_1@tmp/private_key_8300527998234521403.key' // Update with correct path
