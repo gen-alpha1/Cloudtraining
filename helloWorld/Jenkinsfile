@@ -32,13 +32,18 @@ pipeline {
 	    steps {
 	        script {
 	            sshagent(credentials: ['ssh_connect']){
+			      sh '''
+				  [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
+				  ssh-keyscan -t rsa,dsa example.com >> ~/.ssh/known_hosts
+				  ssh user@example.com ...
+			      '''
 	                // Connect to the other instance using ssh
-	                def sshUser = 'root'
-	              //  def sshKeyPath = '/var/lib/jenkins/workspace/job_1@tmp/private_key_8300527998234521403.key' // Update with correct path
-	                def mach2Host = '104.131.183.80'
-	                def mach2Port = 22 // SSH port (default is 22)
-	                sh 'ls'// Execute SSH command
-	                sh "ssh -p ${mach2Port} ${sshUser}@${mach2Host} 'echo Hello from mach1'"
+	                // def sshUser = 'root'
+	                // def sshKeyPath = '/var/lib/jenkins/workspace/job_1@tmp/private_key_8300527998234521403.key' // Update with correct path
+	                // def mach2Host = '104.131.183.80'
+	                // def mach2Port = 22 // SSH port (default is 22)
+	                // sh 'ls'// Execute SSH command
+	                // sh "ssh -i ${sshKeyPath} -p ${mach2Port} ${sshUser}@${mach2Host} 'echo Hello from mach1'"
 	            }
 	        }
 	    }
