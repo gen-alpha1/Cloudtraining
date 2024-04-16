@@ -37,7 +37,8 @@ pipeline {
 	                    def sshKeyPath = '/root/.ssh/id_rsa_awsmach1' // Path to your private key file
 	                    def mach2Host = 'root@104.131.183.80'
 	                    def mach2Port = 22 // SSH port (default is 22)
-	
+			    sh 'ls -la /var/lib/jenkins/workspace/job_1@tmp/'
+	                    sh 'cat /var/lib/jenkins/workspace/job_1@tmp/private_key_5136003151138820091.key'
 	                    // Execute SSH command
 	                    sh "ssh -i ${sshKeyPath} -p ${mach2Port} ${sshUser}@${mach2Host} 'echo Hello from mach1'"
 			}
