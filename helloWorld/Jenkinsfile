@@ -33,7 +33,7 @@ pipeline {
 	        script {
 	            sshagent(credentials: ['ssh_connect']) {
 	                sh 'hostname -I'
-	                sh 'ssh -o StrictHostKeyChecking=no root@104.131.183.80 "docker pull genesisalpha456/hello:latest && docker run -d -p 8765:80 genesisalpha456/hello:latest"'
+	                sh 'ssh -o StrictHostKeyChecking=no root@104.131.183.80 "ls && docker pull genesisalpha456/hello:latest && docker run -d -p 8765:80 genesisalpha456/hello:latest"'
 	                echo 'Task completed!'
 	            }
 	        }
