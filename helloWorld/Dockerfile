@@ -12,3 +12,6 @@ CMD ["python", "./hello.py"]
 
 # Run the python script when the container launches
 CMD ["python", "./welcome.py"]
+
+# Run both Python scripts and print their outputs when the container launches
+CMD ["sh", "-c", "python ./hello.py > output.txt && python ./welcome.py >> output.txt && cat output.txt"]
